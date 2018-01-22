@@ -10,6 +10,10 @@ var DNS_ID = '3731875671593984';
 app.get('/ddns', (req, res) => {
     var ip = req.connection.remoteAddress;
     console.log('ip: ', ip);
+    if (ip.substr(0, 7) == '::ffff:') {
+        ip = ip.substr(7);
+    }
+    console.log('ip: ', ip);
     net
         .update({
             RecordId: DNS_ID,
